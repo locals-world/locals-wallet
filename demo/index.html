@@ -9,40 +9,30 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-    <title>locals-wallet Demo</title>
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-    <link rel="import" href="../locals-wallet.html">
-  </head>
-  <body unresolved>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>locals-wallet Demo</title>
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../locals-wallet.html">
+  <link rel="import" href="../../web3-wallet/web3-wallet.html"></head>
+<body unresolved>
 
-    <p>An example of <code>&lt;locals-wallet&gt;</code>:</p>
+  <template is="dom-bind" id="app">
+    <web3-wallet id="web3wallet" walletname="locals-components-demo" password="test" web3="{{web3}}" host="{{host}}"  balance="{{balance}}" account="{{account}}"></web3-wallet>
 
-    <p>Make words! <button id="saybtn">Say Something</button></p>
-    <p>Make lasers! <button id="laserbtn">Fire lasers</button></p>
+    <locals-wallet web3="{{web3}}" account="{{account}}" balance="{{locals_balance}}"></locals-wallet>
+    <h1>Your Balance in locals</h1>
+    <p>{{locals_balance}} DRIEHOEK</p>
+  </template>
 
-    <locals-wallet author='{"name": "Lord Meowser", "image": "http://placekitten.com/g/200/300"}' fancy>
-      <h2>Hello locals-wallet</h2>
-    </locals-wallet>
-
-    <script>
+  <script>
       var seedElement = document.querySelector('locals-wallet');
       
-      document.querySelector('#saybtn').addEventListener('click', function() {
-        alert(seedElement.sayHello('Hallo!'));
-      });
-      
-      document.querySelector('#laserbtn').addEventListener('click', function() {
-        seedElement.fireLasers();
-      });
-      
-      document.addEventListener("locals-wallet-lasers", function(e) {
-        console.log(e.detail.sound);
-      });
+     var app = document.querySelector('#app');
+      app.host = "http://109.123.70.141:8545";
       
     </script>
 
-  </body>
+</body>
 </html>
